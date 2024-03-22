@@ -1,0 +1,11 @@
+So when you use a server component inside the ContextProvider [ActiveSectionContextProvider], 
+it doesn't mean the children and everything within that component is now a client component.
+As long as it is been passed as children, they can still be server component and this is because 
+of how high up the ContextProvider is in the Tree.
+The only it might become a client component and defeat the whole purpose of nextjs since it going to be in the layout file and 
+possibly wrap the whole page is if 
+1. I imported the actual component say for example I imported the proojects.tsx in the ContextProvider file, then it's no longer
+a server component but a client component.
+
+2. If I directly passed a supposed server component to the ContextProvider[ActiveSectionContextProvider] as a prop instead of children
+so if I did <ActiveSectionContextProvider content={<Projects />} />

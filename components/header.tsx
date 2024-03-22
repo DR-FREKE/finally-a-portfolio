@@ -1,13 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { links } from "@/lib/data";
 import Link from "next/link";
 import { clsx } from "clsx";
+import { useActiveSectionContext } from "@/context/active-section-content";
 
 export const Header = () => {
-  const [active, setActive] = useState("Home");
+  const { active, setActive } = useActiveSectionContext();
   return (
     <header className="z-[999] relative flex justify-center">
       <motion.div

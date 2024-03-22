@@ -1,19 +1,33 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import ProfileImg from "@/public/profileImg.jpeg";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight2, DocumentDownload } from "iconsax-react";
 import { LuGithub, LuLinkedin } from "react-icons/lu";
+import WelcomeAnimation, { BoyWavingAnimation } from "./welcome-animation";
+import { useInView } from "react-intersection-observer";
+import { useActiveSectionContext } from "@/context/active-section-content";
 
 const Intro = () => {
   const MotionImage = motion(Image);
+
+  const { ref, inView } = useInView(
+    { threshold: 0.5 } // when 50% of the about content is in view
+  );
+  const { setActive } = useActiveSectionContext();
+
+  useEffect(() => {
+    if (inView) setActive("Home");
+  }, [inView]);
+
   return (
     <section
       className="text-center mb-28 max-w-[60rem] sm:mb-0 scroll-mt-[100rem]"
       id="home"
+      ref={ref}
     >
       <div className="flex justify-center items-center">
         <div className="relative">
